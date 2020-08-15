@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+  
+ <!-- <script type="text/javascript" src="javascripts/angular.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+  <style type="text/css">
+  	.container{
+  		justify-content: center;
+ 
+  	}
+  		.col-md-12{
+ 		position: relative;
+ 	    /*margin-top: 200px;*/
+ 	    z-index: 2;
+ 	    background-image: linear-gradient(to bottom right, teal, white);
+ 	    font-style: Sans-serif;
+ 	    display: flex;
+ 	    align-content: center;
+ 	    justify-content: center;
+ 	    margin-top: 120px;
+
+ }
+ .col-md-4{
+ 
+ 	padding: 30px;
+ 	margin: auto;
+ 	
+ }
+ body ::-webkit-input-placeholder {
+  /* WebKit browsers */
+  font-family: 'Source Sans Pro', sans-serif;
+  color: white;
+  font-weight: 300;
+}
+ form input{
+ 	width: 250px;
+ 	border-radius: 3px;
+  padding: 10px 15px;
+  margin: 0 auto 5px auto;
+  display: block;
+ 	text-align: center;
+ 	transition: ease-in;
+  /*background-color: #e6f2ff;*/
+  background-color:rgba(255, 255, 255, 0.4);
+  /*color: #4da6ff;*/
+  color: white;
+  border: none;	
+  font-size: 16px;
+ }
+ form input:focus {
+  background-color: white;
+  width: 300px;
+  color: #0073e6;
+  outline-color: white;
+  opacity: 1;
+}
+form button{
+	outline: 0;
+  background-color: white;
+  border: 0;
+  padding: 10px 15px;
+  color:#66b3ff;
+  border-radius: 3px;
+  width: 200px;
+  cursor: pointer;
+  font-size: 18px;
+  justify-content: center;
+  width: 250px;
+  padding: 10px 15px;
+  margin: 0 auto 5px auto;
+  display: block;
+  text-align: center;
+}
+h1{
+	font-style: Sans-serif;
+	color: white;
+	text-align: center;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+.li:focus{
+	background-color: #e6f2ff;
+}
+li:hover{
+  background-color: #e6f2ff;
+}
+  </style>
+</head>
+<body ng-app="myapp">
+ <div class="container" >
+ 	<ul class="nav nav-pills">
+ 		<li><a href="#sign" data-toggle="tab" class ="tab1">Signup</a></li>
+ 		<li><a href="#log" data-toggle="tab" class="tab1">Login</a></li>
+ 	</ul>
+ </div>
+ <div class="tab-content">
+
+
+ 	<div id="sign" class="tab tab-pane  active" ng-controller="signup-Controller">
+ 	   <div class="col-md-12">
+	<div class="col-md-4 col-md-offset-4">
+		<h1>Sign Up</h1>
+		<form >
+			<input type="text" placeholder="Username" ng-model="sign.name"  ><br>
+			<input type="email" placeholder="Email" ng-model="sign.em" ><br>
+			<input type="password" placeholder="Password" ng-model="sign.pwd" ><br>
+			<button type="submit" ng-click="submit(sign)">Submit</button>
+		</form>
+	</div>
+</div>
+ 	</div>
+
+
+
+
+
+
+ 	<div id="log" class="tab tab-pane" ng-controller="logincontroller">
+ 		<div class="col-md-12">
+	<div class="col-md-4 col-md-offset-4">
+		<h1>Login</h1>
+		<form >
+			<!-- <input type="text" placeholder="Username" ng-model=""  ><br><br> -->
+			<input type="email" placeholder="Email" ng-model="log.em" ><br>
+			<input type="password" placeholder="Password" ng-model="log.pwd" ><br>
+			<button type="submit" ng-click="login(log)">Login</button>
+		</form>
+	</div>
+</div>
+ 	</div>	
+ </div>
+</body>
+<script type="text/javascript">
+var app = angular.module('myapp',[])
+app.controller('signup-Controller',['$scope','$http',function($scope,$http){
+   $scope.submit=function(sign){
+  console.log($scope.sign);
+  $http({
+    method:'post',
+    url:'/postsign',
+    data:$scope.sign
+  }).then(function success(response){
+   $scope.sign={};
+   alert("registered successfully");
+ },function error(response){
+  alert("error occured");
+ });
+ }
+}]);
+
+app.controller('logincontroller',['$scope','$http','$window',function($scope,$http,$window){
+  $scope.login=function(log){
+    $http({
+      method:"post",
+      url:"/postlogin",
+      data:$scope.log
+    }).then(function success(response){
+      alert("logged successfully");
+      console.log($scope.log);
+    $scope.log={};
+    $window.location.href='/trail';
+    
+    },function error(response){
+      alert("error");
+      $scope.log={};
+    });
+  }
+}]);
+</script>
+</html>

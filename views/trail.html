@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+    <style>
+        div {
+            width: 100%;
+            height: 50px;
+            display: block;
+            margin: 15px 0 0 10px;
+        }
+    </style>
+</head>
+<body ng-app ng-init="click=true" >
+    <input type="checkbox" ng-model="click" ng-click="click" value="delete" /> <br />
+   <!--  <button ng-model="click" >DELETE</button> -->
+    <div>
+        New: <input ng-if="click" type="text" />
+    </div>
+    <div>
+        Read-only: <input ng-readonly="click" type="text" value="This is read-only." />
+    </div>
+    <div>
+        Disabled: <input ng-disabled="click" type="text" value="This is disabled." />
+    </div>
+</body>
+</html>

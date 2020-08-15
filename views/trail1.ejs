@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Responsive Side Navigation Bar</title>
+	<link rel="stylesheet" href="stylesheets/style.css">
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script type="text/javascript" src="javascripts/bootstrap.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+	<script>
+		$(document).ready(function(){                                  
+			$(".ham").click(function(){
+         $(".wra").toggleClass("collapse");
+      });
+    $(".Register_container").hide();
+     $(".Movies_container").hide();
+      $(".Sports_container").hide();
+       $(".Blogs_container").hide();
+        $(".Nature_container").hide();
+     $("#book").click(function(){
+      $(".Register_container").show();
+      $(".Movies_container").hide();
+      $(".Sports_container").hide();
+       $(".Blogs_container").hide();
+        $(".Nature_container").hide();
+    });
+     $("#movie").click(function(){
+       $(".Register_container").hide();
+      $(".Movies_container").show();
+      $(".Sports_container").hide();
+       $(".Blogs_container").hide();
+        $(".Nature_container").hide();
+
+    });
+      $("#sport").click(function(){
+          $(".Register_container").hide();
+     $(".Movies_container").hide();
+      $(".Sports_container").show();
+      $(".Blogs_container").hide();
+        $(".Nature_container").hide();
+    });
+     $("#blog").click(function(){
+       $(".Register_container").hide();
+     $(".Movies_container").hide();
+      $(".Sports_container").hide();
+      $(".Blogs_container").show();
+       $(".Nature_container").hide();
+    });
+      $("#nature").click(function(){
+      $(".Nature_container").show();
+      $(".Register_container").hide();
+     $(".Movies_container").hide();
+      $(".Sports_container").hide();
+       $(".Blogs_container").hide();
+
+    });
+     
+    
+  });
+	</script>
+  <style type="text/css">
+   
+
+/*-------------------registration model starts-----------------------------------------------*/
+  .col-md-12{
+     border: 1px solid transparent;
+    
+  }
+  .col-md-6{
+    /*border-right: 1px solid green;*/
+    border: 1px solid transparent;
+  }
+  #hidden{
+
+    /*border-style: none;*/
+    border: 1px solid transparent;
+  }
+  .main-box{
+    padding-top: 15px;
+    margin-top: 30px;
+    background: rgba(0,0,0,.8);
+    /*background-image: url(reg.jpg);
+    background-repeat: no-repeat;*/
+    
+  }
+  .head{
+    text-align: center;
+    padding: 10px;
+    margin: 0;
+    color: white;
+    text-shadow: 2px 2px 8px white;
+  }
+  .circle{
+    border: 1px solid white;
+    border-radius: 100%;
+    height: 40px;
+    width: 40px;
+    margin-left:48%;
+    margin-bottom: -30px;
+    margin-top: -35px;
+    background-color: #3385ff;
+  }
+  #image{
+    background-image: url(images/view.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+  }
+  .back{
+         margin-top: 50px;
+  }
+  .fa-user:hover{
+       color:#cc9966;
+       background-color: #e6ccb3
+     }
+     label{
+    color: white;
+     }
+     /* registration model ends here----------------------------------------------*/
+  </style>
+</head>
+<body ng-app="myapp">
+
+<div class="wra">
+  <div class="tp_na">
+    <div class="ham">
+       <div class="one"></div>
+       <div class="two"></div>
+       <div class="three"></div>
+    </div>
+    <div class="tp_men" ng-controller="topmenu-Controller">
+      <div class="logo">CSFO</div>
+      <ul>
+        <li><a href="#">
+          <i class="fas fa-search"></i></a></li>
+        <li><a href="#">
+          <i class="fas fa-bell"></i>
+          </a></li>
+        <li><a href="#">
+          <i class="fas fa-user"></i>
+          </a></li>
+        <li ><a href="#" >
+          <i class="fas fa-sign-out-alt" ng-click="log()"></i>
+          </a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="sdbar">
+      <ul>
+        <li id="book"><a href="#" >
+          <span class="icon" ><i class="fa fa-book" ></i></span>
+          <span class="title" >Register Info</span></a></li>
+        <li id="movie"><a href="#">
+          <span class="icon"><i class="fas fa-file-video"></i></span>
+          <span class="title" >Movies</span>
+          </a></li>
+        <li id="sport"><a href="#">
+          <span class="icon"><i class="fas fa-volleyball-ball"></i></span>
+          <span class="title" >Sports</span>
+          </a></li>
+        <li id="blog"><a href="#" class="">
+          <span class="icon"><i class="fas fa-blog"></i></span>
+          <span class="title" >Blogs</span>
+          </a></li>
+        <li id="nature"><a href="#">
+          <span class="icon"><i class="fas fa-leaf"></i></span>
+          <span class="title" >Nature</span>
+          </a></li>
+    </ul>
+  </div>
+  
+  <div class="Register_container" ng-controller="registerController">
+           <!-- registration model -->
+           <div class="container">
+  <h2></h2>
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Register</button><br><br>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          
+          <div class="back col-md-12 " id="image">
+    
+  <form class="main-box col-md-12 ">
+
+    <div class="circle">
+      <i class="fa fa-user-o" style="font-size: 30px;color:#99c2ff;width: 100%;margin-left: 5px;margin-top: 2px;"></i>
+    </div><br>  <br>  
+    <h2 class="head">REGISTRATION FORM</h2>
+          <div >  
+             <div class="col-md-6"> 
+       
+                 <input type="text" class="form-control" placeholder="Username" ng-model="reg.name"><br>  <br>  
+                 <input type="text" placeholder="College Name" class="form-control" ng-model="reg.cllg"><br>  <br>  
+                 <select class="form-control" ng-model="reg.branch"  placeholder="-----select branch-----">
+                    <option>-----select branch-----</option>
+                    <option>CSE</option>
+                    <option>ECE</option>
+                    <option>EEE</option>
+                    <option>MECH</option>
+                    <option>CIVIL</option>
+                    <option>PET</option>
+                    <option>IT</option>
+                    <option>PHARMACY</option>
+                    <option>FORENSIC SCIENCE</option>
+                 </select><br>  <br>  
+                 <select class="form-control" ng-model="reg.year"   placeholder="---Persuing year---">
+                  <option>I</option>
+                  <option>II</option>
+                  <option>III</option>
+                  <option>IV</option>
+                 </select><br><br>  
+                 <select class="form-control" ng-model="reg.type" placeholder="--select--">
+                
+                  <option>DaySCholar</option>
+                  <option>Hostler</option>
+                 </select><br><br>
+                 <label>Joining Type:</label><br>
+                <label>Management</label>&nbsp;<input type="radio" name="male" value="Management" ng-model="reg.join">&nbsp;<label>Conveyor</label>&nbsp;<input type="radio" name="male" value="Conveyor" ng-model="reg.join" >
+
+        
+      
+            </div>
+           <div class="col-md-6" id="hidden"> 
+               <input type="tel" ng-model="reg.mob" placeholder="Mobile" class="form-control"><br><br>
+               <input type="email" ng-model="reg.email" placeholder="Email" class="form-control"><br><br>
+               <input type="number" placeholder="Age" ng-model="reg.age"class="form-control"><br><br>
+               <label>Gender:</label><br>
+               <label>male</label>&nbsp;<input type="radio" name="male" value="male" ng-model="reg.gen">&nbsp;<label>female</label>&nbsp;<input type="radio" name="male" value="female" ng-model="reg.gen" >&nbsp;<label>other</label>&nbsp;<input type="radio" name="male" value="other" ng-model="reg.gen"><br><br>
+               <label >Address:</label><br>
+               <textarea rows=5 cols=40 ng-model="reg.address"></textarea><br><br>
+
+
+          </div>
+      </div>
+   <div>
+     <button class="btn btn-primary" type="submit" style="margin-left: 46%;margin-bottom: 5px;" ng-click="submit(reg)">Submit</button>
+   </div>
+ </form>
+</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-top: 5px">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<!-- Registration model ends here--------------------------------------------- -->
+
+
+
+
+<!-- register details table-------------------------------------------------------------- -->
+ <table class="table table-bordered table-responsive table-striped ">
+   <thead>
+     <tr>
+      <!-- <th ng-hide="visible"></th> -->
+       <th>S.No</th>
+       <!-- <th>_ID</th> -->
+       <th>Name</th>
+       <th>College Name</th>
+       <th>Branch</th>
+       <th>Year</th>
+       <th>Category</th>
+       <th>Type of Join</th>
+       <th>Mobile</th>
+       <th>Email</th>
+       <th>Age</th>
+       <th>Gender</th>
+       <th>Address</th>
+       <th>Option</th>
+       
+     </tr>
+   </thead>
+   <tbody>
+     <tr ng-repeat="reg in person">
+       <!-- <td ng-hide="invisible"><input type="checkbox" ng-click="select(reg)" value="true"  ></td> -->
+       <td >{{$index+1}}</td>
+       <!-- <td>{{reg._id}}</td> -->
+       <td >
+      <span ng-hide="edit">{{reg.name}}</span> 
+       <input ng-show="edit" type="text" ng-model="reg.name">
+     </td>
+       <td>
+       <span ng-hide="edit">{{reg.cllg}}</span>
+       <input ng-show="edit" type="text" ng-model="reg.cllg">
+     </td>
+       <td>
+        <span ng-hide="edit">{{reg.branch}}</span>
+        <input ng-show="edit" type="text" ng-model="reg.branch">
+     </td>
+       <td>
+       <span ng-hide="edit">{{reg.year}}</span>
+       <input ng-show="edit" type="text" ng-model="reg.year">
+     </td>
+       <td>
+       <span ng-hide="edit">{{reg.type}}</span>
+       <input ng-show="edit" type="text" ng-model="reg.type">
+     </td>
+       <td>
+       <span ng-hide="edit">{{reg.join}}</span>
+       <input ng-show="edit" type="text" ng-model="reg.join">
+     </td>
+       <td>
+       <span ng-hide="edit">{{reg.mob}}</span>
+       <input ng-show="edit" type="text" ng-model="reg.mob">
+     </td>
+       <td>
+       <span ng-hide="edit">{{reg.email}}</span>
+       <input ng-show="edit" type="text" ng-model="reg.email">
+     </td>
+       <td>
+       <span ng-hide="edit">{{reg.age}}</span>
+       <input ng-show="edit" type="text" ng-model="reg.age">
+     </td>
+       <td>
+       <span ng-hide="edit">{{reg.gen}}</span>
+       <input ng-show="edit" type="text" ng-model="reg.gen">
+     </td>
+       <td>
+       <span ng-hide="edit">{{reg.address}}</span>
+       <input ng-show="edit" type="text" ng-model="reg.address">
+     </td>
+       <td>
+        <button class="btn btn-danger" ng-click="delData(reg)">Delete</button>&nbsp;&nbsp;
+        <button class="btn btn-primary" ng-click="edit=true" ng-hide="edit">Edit</button>
+        <button class="btn btn-success" ng-click="update(reg);edit=false" ng-show="edit" >ok</button>
+
+        
+      </td>
+     
+     </tr>
+   </tbody>
+ </table> 
+
+ <!-- <button class="red btn btn-danger" ng-click="count=count+1"  ng-init="count=0" >DELETE</button>  
+ <div ng-model="reg.count">{{count}}</div> -->
+  </div>
+  <div class="Movies_container">
+    Sam Movies  
+  </div>
+  <div class="Sports_container">
+    Sports
+  </div>
+  <div class="Blogs_container">
+    Blogs
+  </div>
+   <div class="Nature_container">
+    Nature
+    Probably the most effective way to achieve paragraph unity is to express the central idea of the paragraph in a topic sentence.
+
+Topic sentences are similar to mini thesis statements. Like a thesis statement, a topic sentence has a specific main point. Whereas the thesis is the main point of the essay, the topic sentence is the main point of the paragraph. Like the thesis statement, a topic sentence has a unifying function. But a thesis statement or topic sentence alone doesn’t guarantee unity. An essay is unified if all the paragraphs relate to the thesis, whereas a paragraph is unified if all the sentences relate to the topic sentence. Note: Not all paragraphs need topic sentences. In particular, opening and closing paragraphs, which serve different functions from body paragraphs, generally don’t have topic sentences.
+
+In academic writing, the topic sentence nearly always works best at the beginning of a paragraph so that the reader knows what to expect:
+
+The embrace of Twitter by politicians and journalists has been one of its most notable features in recent years: for both groups the use of Twitter is becoming close to a requirement.
+
+—Paul Bernal, “A Defence of Responsible Tweeting”
+
+This topic sentence forecasts the central idea or main point of the paragraph: “politicians” and “journalists” rely on Twitter. The rest of the paragraph will focus on these two Twitter-user groups, thereby fulfilling the promise made by the topic sentence. By avoiding irrelevant information that does not relate to the topic sentence, you can compose a unified paragraph.
+
+How do I develop my ideas in a paragraph?
+Often, the body paragraph demonstrates and develops your topic sentence through an ordered, logical progression of ideas. There are a number of useful techniques for expanding on topic sentences and developing your ideas in a paragraph. Illustration in a paragraph supports a general statement by means of examples, details, or relevant quotations (with your comments).
+  </div>
+
+
+
+	</div>
+</body>
+<script type="text/javascript">
+var app=angular.module('myapp',[])
+app.controller('topmenu-Controller',['$scope','$window',function($scope,$window){
+  $scope.log=function(){
+       $window.location.href='/out';
+  }
+}])
+app.controller('registerController',['$scope','$http',function($scope,$http){
+
+  $http({
+    method:'get',
+    url:'/getreg',
+  }).then(function success(response){
+    $scope.person=response.data;
+    alert("success");
+  },function error(response){
+     alert("error");
+  })
+
+  $scope.submit=function(reg){
+    console.log($scope.reg);
+   $http({
+     method:'post',
+     url:'/postreg',
+     data:$scope.reg
+   }).then(function success(response){
+    $scope.person.push(response.data);
+    $scope.reg={};
+    alert("registration successful");
+   },function error(response){
+    $scope.reg={};
+    alert("error! try after sometime");
+   })    
+  }
+
+  $scope.delData=function(reg){
+    $http({
+      method:'delete',
+      url:'/deletedata'+reg._id
+    }).then(function success(response){
+      alert("deleted successfully")
+       var index=$scope.person.indexOF(reg);
+       $scope.person.splice(index,1);
+    },function error(response){
+      alert("error in deleting");
+    })
+  }
+   
+
+  $scope.update=function(reg){
+    $http({
+      method:'put',
+      url:'/updateuser'+reg._id,
+      data:reg
+    }).then(function success(response){
+      alert("updated successfully");
+    },function error(response){
+      alert("eror");
+    })
+  }
+  
+ 
+  
+
+}])
+</script>
+</html>
