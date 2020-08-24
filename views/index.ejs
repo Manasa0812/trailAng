@@ -94,7 +94,13 @@ h1{
 li:hover{
   background-color: #e6f2ff;
 }
+.a{
+  color:#0073e6;
+  text-align: center;
+}
+
   </style>
+
 </head>
 <body ng-app="myapp">
  <div class="container" >
@@ -133,7 +139,8 @@ li:hover{
 			<!-- <input type="text" placeholder="Username" ng-model=""  ><br><br> -->
 			<input type="email" placeholder="Email" ng-model="log.em" ><br>
 			<input type="password" placeholder="Password" ng-model="log.pwd" ><br>
-			<button type="submit" ng-click="login(log)">Login</button>
+			<button type="submit" ng-click="login(log)">Login</button><br>
+      <a href="" class="a col-md-6 col-md-offset-3" ng-click="go()" >forgot password</a>
 		</form>
 	</div>
 </div>
@@ -168,12 +175,15 @@ app.controller('logincontroller',['$scope','$http','$window',function($scope,$ht
       alert("logged successfully");
       console.log($scope.log);
     $scope.log={};
-    $window.location.href='/trail';
+    $window.location.href='/trail1';
     
     },function error(response){
       alert("error");
       $scope.log={};
     });
+  }
+  $scope.go=function(){
+    $window.location.href="/forgot";
   }
 }]);
 </script>

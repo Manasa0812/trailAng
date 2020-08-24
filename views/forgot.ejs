@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  
+ <!-- <script type="text/javascript" src="javascripts/angular.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+  <style type="text/css">
+  	h2{
+  		text-align: center;
+  	}
+  	button{
+  		font-size: 30px;
+  		background-color:transparent;
+  		border: none;
+  		outline: none;
+  	}
+  	input[type="submit"]{
+  		background-color: #0073e6;
+  		color: white;
+  	}
+  </style>
+</head>
+<body ng-app="app" ng-controller="mail-controller">
+	<button class="glyphicon glyphicon-arrow-left col-md-1"style="font-size: 30px;background-color:transparent;border: none;outline: none" ng-click="back()"></button>
+	<form class="col-md-5 col-md-offset-3">
+		<h2>Forgot Password?</h2><br>
+	<input type="email" class="form-control" ng-model="email.inf" placeholder="Type your mail " style="box-shadow: 8px 8px 8px 8px"><br><br>
+	<input type="submit" ng-click="send(email)" value="Send mail">
+	</form>
+</body>
+<script type="text/javascript">
+var app=angular.module('app',[])
+app.controller('mail-controller',['$scope','$http','$window',function($scope,$http,$window){
+	$scope.send=function(email){
+		console.log($scope.email);
+	$http({
+		method:'post',
+		url:'/postmail',
+		data:$scope.email
+	}).then(function success(response){
+		alert("otp sent");
+		$scope.email={};
+	},function error(response){
+		alert("error occured");
+	});
+}
+$scope.back=function(){
+	$window.location.href='/';
+}
+}])
+</script>
+</html>

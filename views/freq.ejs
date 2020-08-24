@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+<style type="text/css">
+	.container{
+		min-height: 100vh;
+	width: 100%;
+	display: flex;
+	background:  #00A1BF;
+	}
+	.shadow1{
+		position: relative;
+        /* height: 300px;
+         width: 400px;*/
+         position: absolute;
+	top:50%;
+	left:50%;
+	transform: translate(-50%,-50%);
+        
+}
+textarea{
+	background: #fff;
+	 box-shadow: -30px 30px 20px rgba(0,0,0,0.3);
+}
+.btn1{
+	background: #00A1BF;
+	padding: 10px;
+	border-radius: 20px;
+	color: white;
+}
+.btn1:hover{
+	background:#fff ;
+	color: #00A1BF;
+}
+h1{
+ color: white;
+  text-shadow: 2px 2px 4px #fff;
+  text-align: center;
+}
+
+</style>
+
+</head>
+<body ng-app="myapp">
+     <div class="container" ng-controller="text-controller">
+     	<div class="shadow1" >
+     	<h1>FEEDBACK</h1>
+     	<!-- <textarea cols="50" rows="15" ng-model="info.text"></textarea> -->
+     	<input type="text" ng-model="info.text" maxlength="100" width="60">
+     	<br><br>
+     	<button  ng-click="submit(info)" class="btn1">Submit</button>
+     	</div>
+</body>
+</html>
+<script type="text/javascript">
+var app=angular.module('myapp',[])
+app.controller('text-controller',['$scope','$http',function($scope,$http){
+    $scope.submit=function(info){
+    	$http({
+    		method:'post',
+    		url:'/posttext',
+    		data:$scope.info
+    	})
+    }
+}])
+</script>

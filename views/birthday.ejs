@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  
+ <!-- <script type="text/javascript" src="javascripts/angular.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+  <style type="text/css"></style>
+</head>
+<body ng-app="bdayapp" ng-controller="bdayformController">
+	<div class="col-md-6 col-md-offset-3" >
+		<form class="col-md-6 col-md-offset-3">
+			<input type="text" placeholder="Username" ng-model="bday.name"><br><br>
+			<input type="email" placeholder="Email" ng-model="bday.em"><br><br>
+			<input type="date" placeholder="birth date" ng-model="bday.dob"><br><br>
+			<input type="submit" ng-click="submit(bday)">
+		</form>
+	</div>
+	<div>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>S.no</th>
+					<th>Name</th>
+					<th>Email</th>
+					<th>DOB</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="bday in details">
+				  <td>{{$index+1}}</td>
+				  <td>{{bday.name}}</td>
+				  <td>{{bday.em}}</td>
+				  <td>{{bday.dob}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+<script type="text/javascript">
+var app=angular.module('bdayapp',[])
+app.controller('bdayformController',['$scope','$http',function($scope,$http){
+    $http({
+   	method:'get',
+   	url:'/birthdaydata'
+   }).then(function success(responce){
+   		$scope.details=responce.data;
+   		alert("table sent");
+   },function error(responce){
+   	alert("error in table");
+   });
+   
+	$scope.submit=function(bday){
+       $http({
+       	method:'post',
+       	url:'/postbday',
+       	data:$scope.bday
+       }).then(function success(responce){
+       	$scope.details.push(responce.data);
+       		$scope.bday={};
+       	console.log($scope.details);
+       	alert("success");
+       },function error(responce){
+       	alert("error");
+       }); 
+   }   
+}])
+</script>
+</html>

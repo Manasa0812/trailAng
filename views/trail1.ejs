@@ -232,7 +232,7 @@
                   <option>Hostler</option>
                  </select><br><br>
                  <label>Joining Type:</label><br>
-                <label>Management</label>&nbsp;<input type="radio" name="male" value="Management" ng-model="reg.join">&nbsp;<label>Conveyor</label>&nbsp;<input type="radio" name="male" value="Conveyor" ng-model="reg.join" >
+                <label>Management</label>&nbsp;<input type="radio" name="join" value="Management" ng-model="reg.join">&nbsp;<label>Conveyor</label>&nbsp;<input type="radio" name="join" value="Conveyor" ng-model="reg.join" >
 
         
       
@@ -243,6 +243,7 @@
                <input type="number" placeholder="Age" ng-model="reg.age"class="form-control"><br><br>
                <label>Gender:</label><br>
                <label>male</label>&nbsp;<input type="radio" name="male" value="male" ng-model="reg.gen">&nbsp;<label>female</label>&nbsp;<input type="radio" name="male" value="female" ng-model="reg.gen" >&nbsp;<label>other</label>&nbsp;<input type="radio" name="male" value="other" ng-model="reg.gen"><br><br>
+               <input type="date" ng-model="reg.dob" placeholder="Date Of Birth"><br><br>
                <label >Address:</label><br>
                <textarea rows=5 cols=40 ng-model="reg.address"></textarea><br><br>
 
@@ -269,7 +270,7 @@
 
 
 <!-- register details table-------------------------------------------------------------- -->
- <table class="table table-bordered table-responsive table-striped ">
+ <table class="table table-bordered table-responsive table-striped table-hover ">
    <thead>
      <tr>
       <!-- <th ng-hide="visible"></th> -->
@@ -285,6 +286,7 @@
        <th>Email</th>
        <th>Age</th>
        <th>Gender</th>
+       <th>DOB</th>
        <th>Address</th>
        <th>Option</th>
        
@@ -336,20 +338,85 @@
        <input ng-show="edit" type="text" ng-model="reg.gen">
      </td>
        <td>
+       <span ng-hide="edit">{{reg.dob}}</span>
+       <input ng-show="edit" type="text" ng-model="reg.dob">
+     </td>
+       <td>
        <span ng-hide="edit">{{reg.address}}</span>
        <input ng-show="edit" type="text" ng-model="reg.address">
      </td>
        <td>
-        <button class="btn btn-danger" ng-click="delData(reg)">Delete</button>&nbsp;&nbsp;
-        <button class="btn btn-primary" ng-click="edit=true" ng-hide="edit">Edit</button>
-        <button class="btn btn-success" ng-click="update(reg);edit=false" ng-show="edit" >ok</button>
+        <button class="glyphicon glyphicon-trash btn btn-danger" ng-click="delData(reg)">Delete</button>&nbsp;&nbsp;
+        <button class="glyphicon glyphicon-edit btn btn-primary" ng-click="edit=true" ng-hide="edit">Edit</button>
+        <button class="glyphicon glyphicon-tick btn btn-success" ng-click="update(reg);edit=false" ng-show="edit" >ok</button>
 
         
       </td>
      
      </tr>
    </tbody>
+
+
+ <h2>Yesterday Birthdays</h2>
+ <table class="table table-bordered table-responsive table-striped table-hover" >
+   <thead>
+     <tr>
+       <th>S.no</th>
+       <th>Name</th>
+       <th>Date Of Birth</th>
+       <th>Action</th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr ng-repeat="reg in yesbday">
+       <td>{{$index+1}}</td>
+       <td>{{reg.name}}</td>
+       <td>{{reg.dob}}</td>
+       <td><button class="glyphicon glyphicon-envelope btn btn-primary">Send Mail</button></td>
+     </tr>
+   </tbody>
+ </table>
+
  </table> 
+ <h2>Today Birthdays</h2>
+ <table class="table table-bordered table-responsive table-striped table-hover" >
+   <thead>
+     <tr>
+       <th>S.no</th>
+       <th>Name</th>
+       <th>Date Of Birth</th>
+       <th>Action</th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr ng-repeat="reg in details">
+       <td>{{$index+1}}</td>
+       <td>{{reg.name}}</td>
+       <td>{{reg.dob}}</td>
+       <td><button class="glyphicon glyphicon-envelope btn btn-primary">Send Mail</button></td>
+     </tr>
+   </tbody>
+ </table>
+
+ <h2>Tomorrow Birthdays</h2>
+ <table class="table table-bordered table-responsive table-striped table-hover" >
+   <thead>
+     <tr>
+       <th>S.no</th>
+       <th>Name</th>
+       <th>Date Of Birth</th>
+       <th>Action</th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr ng-repeat="reg in tombday">
+       <td>{{$index+1}}</td>
+       <td>{{reg.name}}</td>
+       <td>{{reg.dob}}</td>
+       <td><button class="glyphicon glyphicon-envelope btn btn-primary">Send Mail</button></td>
+     </tr>
+   </tbody>
+ </table>
 
  <!-- <button class="red btn btn-danger" ng-click="count=count+1"  ng-init="count=0" >DELETE</button>  
  <div ng-model="reg.count">{{count}}</div> -->
@@ -396,6 +463,38 @@ app.controller('registerController',['$scope','$http',function($scope,$http){
 
   $http({
     method:'get',
+    url:'/Todaybday'
+  }).then(function success(response){
+     $scope.details=response.data;
+     alert("bday sent");
+  },function error(response){
+    alert("error in todaybday");
+  });
+
+   $http({
+    method:'get',
+    url:'/yesbday'
+  }).then(function success(response){
+     $scope.yesbday=response.data;
+     // alert("bday sent");
+  },function error(response){
+    alert("error in yesbday");
+  });
+
+ $http({
+    method:'get',
+    url:'/tombday'
+  }).then(function success(response){
+     $scope.tombday=response.data;
+     // alert("bday sent");
+  },function error(response){
+    alert("error in tombday");
+  });
+
+
+
+  $http({
+    method:'get',
     url:'/getreg',
   }).then(function success(response){
     $scope.person=response.data;
@@ -412,6 +511,7 @@ app.controller('registerController',['$scope','$http',function($scope,$http){
      data:$scope.reg
    }).then(function success(response){
     $scope.person.push(response.data);
+     // $scope.details.push(response.data);
     $scope.reg={};
     alert("registration successful");
    },function error(response){
